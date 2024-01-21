@@ -1,0 +1,153 @@
+<!-- Declaração do tipo de documento e idioma -->
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Configurações da página -->
+<head>
+    <!-- Configuração do conjunto de caracteres e escala de visualização -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Título da página -->
+    <title>Calculadora</title>
+
+    <!-- Estilos da página -->
+    <style>
+        /* Reset de margens e preenchimentos para todos os elementos */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Estilo do fundo usando gradiente linear */
+        .fundo {
+            background-image: linear-gradient(45deg, black, rgb(19, 213, 19));
+            height: 100vh; /* Altura igual à altura da tela do dispositivo */
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center; /* Centraliza o texto na div de fundo */
+        }
+
+        /* Estilo da calculadora */
+        .calculadora {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.9 ); /* Cor de fundo com transparência */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 15px;
+            padding: 15px;
+        }
+
+        /* Estilo dos botões */
+        .botao {
+            width: 50px; /* Largura dos botões */
+            height: 50px; /* Altura dos botões */
+            font-size: 25px; /* Tamanho da fonte nos botões */
+            cursor: pointer; /* Mostra a mãozinha ao passar o mouse sobre */
+            margin: 3px; /* Margem entre os botões */
+            background-color: rgb(31, 31, 31); /* Cor de fundo inicial dos botões */
+            border: none; /* Sem borda nos botões */
+            color: white; /* Cor do texto nos botões */
+        }
+
+        /* Efeito de hover nos botões */
+        .botao:hover {
+            background-color: black; /* Cor de fundo ao passar o mouse sobre os botões */
+        }
+
+        /* Estilo do resultado */
+        #resultado{
+            background-color: white; /* Cor de fundo do resultado */
+            width: 207px; /* Largura do resultado */
+            height: 30px; /* Altura do resultado */
+            margin: 5px; /* Margem entre o resultado e os botões */
+            padding: 5px; /* Preenchimento interno do resultado */
+            font-size: 25px; /* Tamanho da fonte no resultado */
+            color: black; /* Cor do texto no resultado */
+            text-align: right; /* Alinhamento do texto à direita no resultado */
+        }
+    </style>
+</head>
+
+<!-- Corpo da página -->
+<body>
+    <!-- Div de fundo -->
+    <div class="fundo">
+        <!-- Título -->
+        <h1>Yan Rodrigues</h1>
+
+        <!-- Div da calculadora -->
+        <div class="calculadora">
+            <!-- Título da calculadora -->
+            <h1>Calculadora</h1>
+
+            <!-- Parágrafo para exibir o resultado -->
+            <p id="resultado"></p>
+
+            <!-- Tabela de botões da calculadora -->
+            <table>
+                <tr>
+                    <td><button class="botao" onclick="clean()">C</button></td>
+                    <td><button class="botao" onclick="back()"><</button></td>
+                    <td><button class="botao" onclick="insert('/')">/</button></td>
+                    <td><button class="botao" onclick="insert('*')">X</button></td>
+                </tr>
+                <tr>
+                    <td><button class="botao" onclick="insert('7')">7</button></td>
+                    <td><button class="botao" onclick="insert('8')">8</button></td>
+                    <td><button class="botao" onclick="insert('9')">9</button></td>
+                    <td><button class="botao" onclick="insert('-')">-</button></td>
+                </tr>
+                <tr>
+                    <td><button class="botao" onclick="insert('4')">4</button></td>
+                    <td><button class="botao" onclick="insert('5')">5</button></td>
+                    <td><button class="botao" onclick="insert('6')">6</button></td>
+                    <td><button class="botao" onclick="insert('+')">+</button></td>
+                </tr>
+                <tr>
+                    <td><button class="botao" onclick="insert('1')">1</button></td>
+                    <td><button class="botao" onclick="insert('2')">2</button></td>
+                    <td><button class="botao" onclick="insert('3')">3</button></td>
+                    <td rowspan="2"><button class="botao" style="height: 106px;" onclick="calcular()">=</button></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><button class="botao" style="width: 106px;" onclick="insert('0')">0</button></td>
+                    <td><button class="botao" onclick="insert('.')">.</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Script para as operações da calculadora -->
+    <script>
+        // Função para inserir números e operadores no resultado
+        function insert(num){
+            var numero = window.document.getElementById('resultado').innerHTML;
+            window.document.getElementById('resultado').innerHTML = numero + num
+        }
+
+        // Função para limpar o resultado
+        function clean(){
+            window.document.getElementById('resultado').innerHTML = "";
+        }
+
+        // Função para apagar o último caractere no resultado
+        function back(){
+            var resultado = window.document.getElementById('resultado').innerHTML;
+            window.document.getElementById('resultado').innerHTML = resultado.substring(0, resultado.length - 1)
+        }
+
+        // Função para calcular a expressão no resultado
+        function calcular(){
+            var resultado = window.document.getElementById('resultado').innerHTML;
+            if(resultado){
+                window.document.getElementById('resultado').innerHTML = eval(resultado);
+            }
+            else{
+                window.document.getElementById('resultado').innerHTML = "Nada..."
+            }
+        }
+    </script>
+</body>
+</html>
